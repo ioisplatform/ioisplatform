@@ -572,5 +572,129 @@ function removeUnanswered(idx){
   renderUnanswered();
 }
 </script>
-</body>
+</body><!-- ================= AI CHATBOT SYSTEM ================= -->
+<!-- Chatbot Floating Trigger Button -->
+<button onclick="openAIChat()" class="fixed bottom-6 right-6 z-[190] flex items-center gap-2 px-4 py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 text-slate-950 font-black text-xs uppercase shadow-2xl shadow-amber-500/40 transition transform hover:scale-105 border border-amber-300">
+  <i data-lucide="sparkles" class="w-4 h-4"></i>
+  <span>IOIS AI सहायता</span>
+</button>
+
+<!-- Chatbot Modal Window -->
+<div id="ai-chat-modal" class="fixed inset-0 z-[200] bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+  <div class="glass-card w-full max-w-lg rounded-3xl border border-amber-500/40 flex flex-col h-[600px] shadow-2xl overflow-hidden bg-slate-950/95">
+    
+    <!-- Chat Header -->
+    <div class="p-4 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-black text-xs shadow-inner">AI</div>
+        <div>
+          <h3 class="text-sm font-black text-white flex items-center gap-1.5">
+            IOIS Advanced AI Assistant 
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          </h3>
+          <p class="text-[10px] text-emerald-400 font-bold">● ऑनलाइन और सक्रिय (2026)</p>
+        </div>
+      </div>
+      <button onclick="closeAIChat()" class="text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800/60 transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div>
+    
+    <!-- Chat Messages Box -->
+    <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
+      <div class="chat-ai p-3.5 rounded-2xl text-slate-200 shadow-md">
+        नमस्ते! 🙏 मैं **IOIS Advanced AI Assistant** हूँ। आप मुझसे IOIS प्लेटफ़ॉर्म, 7 मास्टर प्लान्स, पेआउट विवरण या रजिस्ट्रेशन के बारे में कुछ भी पूछ सकते हैं। मैं आपकी सहायता के लिए तैयार हूँ!
+      </div>
+    </div>
+    
+    <!-- Quick Suggested Prompts -->
+    <div class="px-4 py-2 bg-slate-900/50 border-t border-slate-800/60 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
+      <button onclick="sendQuickPrompt('IOIS के सभी plans बताओ')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-[11px] font-bold border border-slate-700 transition">📦 सभी प्लांस</button>
+      <button onclick="sendQuickPrompt('पैसे कैसे कमाए जाते हैं और पेआउट कितना है?')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-[11px] font-bold border border-slate-700 transition">💰 पेआउट जानकारी</button>
+      <button onclick="sendQuickPrompt('रजिस्ट्रेशन कैसे करें?')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-[11px] font-bold border border-slate-700 transition">📝 रजिस्ट्रेशन लिंक</button>
+    </div>
+
+    <!-- Chat Input Box -->
+    <div class="p-3 bg-slate-900 border-t border-slate-800 flex gap-2 items-center">
+      <input type="text" id="chat-input" placeholder="यहाँ अपना सवाल टाइप करें..." class="flex-1 p-3 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-500 shadow-inner" onkeypress="handleChatKeyPress(event)">
+      <button onclick="sendChatMessage()" class="px-4 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 text-slate-950 font-black text-xs flex items-center justify-center shadow-lg transition transform hover:scale-105"><i data-lucide="send" class="w-4 h-4"></i></button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Chatbot & UI JavaScript Logic -->
+<script>
+// Chat Modal Controls
+function openAIChat() {
+  document.getElementById('ai-chat-modal').classList.remove('hidden');
+  if(typeof lucide !== 'undefined') { lucide.createIcons(); }
+  document.getElementById('chat-input').focus();
+}
+
+function closeAIChat() {
+  document.getElementById('ai-chat-modal').classList.add('hidden');
+}
+
+function sendQuickPrompt(text) {
+  document.getElementById('chat-input').value = text;
+  sendChatMessage();
+}
+
+// Advanced Chat Response Logic for IOIS Platform
+function sendChatMessage() {
+  const inputField = document.getElementById('chat-input');
+  const messageText = inputField.value.trim();
+  if(!messageText) return;
+
+  const chatBox = document.getElementById('chat-messages');
+  
+  // User Message Append
+  chatBox.innerHTML += `<div class="chat-user p-3.5 rounded-2xl text-amber-100 ml-auto max-w-[85%] shadow-md">${escapeHTML(messageText)}</div>`;
+  inputField.value = '';
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // AI Processing Simulation
+  setTimeout(() => {
+    let aiReply = "मुझे आपकी बात पूरी तरह समझ नहीं आई। कृपया IOIS के 7 मास्टर प्लान्स, पेआउट दर, या रजिस्ट्रेशन प्रक्रिया के बारे में पूछें।";
+    const query = messageText.toLowerCase();
+
+    if(query.includes('plan') || query.includes('प्लान') || query.includes('kitne plan') || query.includes('plans')) {
+      aiReply = "📦 **IOIS के 7 मास्टर प्लान्स की सूची:**\n" +
+                "• **Plan 01:** Bal Vikas Access (₹10) -> ₹7 Payout\n" +
+                "• **Plan 02:** Youth Skill Access (₹49) -> ₹34 Payout\n" +
+                "• **Plan 03:** Career & Job Access (₹99) -> ₹64 Payout\n" +
+                "• **Plan 04:** Family VIP Access (₹199) -> ₹119 Payout\n" +
+                "• **Plan 05:** Student Elite Access (₹299) -> ₹179 Payout\n" +
+                "• **Plan 06:** Agency Reseller Hub (₹499) -> ₹274 Payout\n" +
+                "• **Plan 07:** Lifetime Master Access (₹999) -> ₹499 Payout";
+    } 
+    else if(query.includes('payout') || query.includes('कमाई') || query.includes('commission') || query.includes('paise') || query.includes('पैसा')) {
+      aiReply = "💰 **पेआउट और कमाई की जानकारी:**\n" +
+                "IOIS प्लेटफ़ॉर्म पर डिजिटल सामग्री साझा करने और सत्यापन पर आपको **50% से 70% तक का तत्काल रेफरल पेआउट** मिलता है। उदाहरण के लिए, ₹999 वाले Master Plan पर आपको सीधे ₹499 का पेआउट प्राप्त होता है!";
+    } 
+    else if(query.includes('register') || query.includes('join') || query.includes('जुड़ना') || query.includes('link') || query.includes('फॉर्म')) {
+      aiReply = "📝 **रजिस्ट्रेशन प्रक्रिया:**\n" +
+                "आप हमारे आधिकारिक Google Form के माध्यम से जुड़ सकते हैं। किसी भी प्लान के नीचे दिए गए 'REGISTER / JOIN' बटन पर क्लिक करें या सीधे ऊपर दिए गए नेविगेशन लिंक का उपयोग करें।";
+    }
+    else if(query.includes('iois') || query.includes('platform') || query.includes('क्या है')) {
+      aiReply = "💡 **IOIS Platform क्या है?**\n" +
+                "Indian Online Income Supporting System (IOIS) भारत का आधिकारिक डिजिटल लर्निंग व इनकम सपोर्टिंग पोर्टल है, जो छात्रों और युवाओं को अध्ययन सामग्री, AI प्रॉम्प्ट्स और डिजिटल टूल्स प्रदान करता है।";
+    }
+
+    chatBox.innerHTML += `<div class="chat-ai p-3.5 rounded-2xl text-slate-200 mr-auto max-w-[85%] whitespace-pre-line shadow-md">${aiReply}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 500);
+}
+
+function handleChatKeyPress(event) {
+  if (event.key === 'Enter') {
+    sendChatMessage();
+  }
+}
+
+function escapeHTML(str) {
+  return str.replace(/[&<>'"]/g, 
+    tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+  );
+}
+</script>
 </html>
