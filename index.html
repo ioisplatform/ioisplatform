@@ -109,12 +109,49 @@ body{background:#020617;color:#f1f5f9;font-family:'Plus Jakarta Sans','Noto Sans
 
 <footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500 space-y-2"><p>© 2026 IOIS PLATFORM - Indian Online Income Supporting System. All Rights Reserved.</p><p class="text-[11px] text-slate-600">Secure 256-Bit SSL Encrypted | Verified Digital Learning Ecosystem</p></footer>
 
+<!-- AI चैट मॉडल जिसमें एडमिन पैनल और मेन्यू बटन जोड़ा गया है -->
 <div id="ai-chat-modal" class="fixed inset-0 z-[60] bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
 <div class="bg-slate-950 border border-amber-500/50 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden">
-<div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center"><i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i></div><div><h3 class="text-white font-black text-sm">IOIS Smart AI Assistant</h3><p class="text-[10px] text-emerald-400 font-bold">CONTEXTUAL ASSISTANT • ONLINE</p></div></div><button onclick="closeAIChat()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+<div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center"><i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i></div>
+<div><h3 class="text-white font-black text-sm">IOIS Smart AI Assistant</h3><p class="text-[10px] text-emerald-400 font-bold">CONTEXTUAL ASSISTANT • ONLINE</p></div>
+</div>
+<!-- मेन्यू बटन और एडमिन पैनल ट्रिगर -->
+<div class="flex items-center gap-2">
+  <button onclick="toggleAdminPanel()" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[11px] font-bold flex items-center gap-1 hover:bg-amber-500/30 transition">
+    <i data-lucide="settings" class="w-3.5 h-3.5"></i> एडमिन पैनल
+  </button>
+  <button onclick="closeAIChat()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+</div>
+</div>
+
+<!-- एडमिन पैनल (पासवर्ड सुरक्षित) -->
+<div id="admin-panel" class="hidden p-4 bg-slate-900 border-b border-amber-500/30 space-y-3">
+  <div class="flex justify-between items-center">
+    <h4 class="text-xs font-black text-amber-400 flex items-center gap-1"><i data-lucide="lock" class="w-3.5 h-3.5"></i> एडमिन ट्रेनिंग पैनल</h4>
+    <button onclick="toggleAdminPanel()" class="text-slate-400 text-xs hover:text-white">बंद करें</button>
+  </div>
+  
+  <div id="admin-auth-box" class="space-y-2">
+    <p class="text-[10px] text-slate-300">एडमिन एक्सेस के लिए पासवर्ड दर्ज करें:</p>
+    <div class="flex gap-2">
+      <input type="password" id="admin-pass-input" placeholder="पासवर्ड दर्ज करें..." class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2 text-xs outline-none focus:border-amber-400">
+      <button onclick="verifyAdminPassword()" class="px-3 py-1 bg-amber-500 text-slate-950 font-black rounded-lg text-xs">लॉगिन</button>
+    </div>
+  </div>
+
+  <div id="admin-form-box" class="hidden space-y-2.5">
+    <p class="text-[10px] text-emerald-400 font-bold">✓ पासवर्ड सत्यापित! अब नए सवाल-जवाब सिखाएं (डेटाबेस से कभी डिलीट नहीं होगा):</p>
+    <input type="text" id="admin-new-q" placeholder="यूजर का संभावित सवाल (जैसे: फीस कितनी है?)" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2 text-xs outline-none focus:border-amber-400">
+    <textarea id="admin-new-a" placeholder="बॉट द्वारा दिया जाने वाला सही जवाब..." class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2 text-xs outline-none focus:border-amber-400 h-16"></textarea>
+    <button onclick="saveCustomAnswer()" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-lg text-xs">बॉट को यह जवाब सिखाएं (Save)</button>
+  </div>
+</div>
+
 <div id="chat-messages" class="h-[55vh] max-h-[520px] overflow-y-auto space-y-3 p-4 text-xs sm:text-sm"></div>
 <div id="chat-suggestions" class="px-4 pb-3 flex gap-2 overflow-x-auto"></div>
-<div class="p-4 border-t border-slate-800 bg-slate-950"><div class="flex gap-2"><input type="text" id="ai-input" placeholder="अपना पूरा सवाल लिखें..." autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();sendChatMessage()}" class="flex-1 bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-3 text-xs sm:text-sm outline-none focus:border-amber-400"><button onclick="sendChatMessage()" class="px-4 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">भेजें</button></div><p class="text-[9px] text-slate-600 mt-2">यह चैट इस single-file version में स्थानीय knowledge engine पर चलती है; वास्तविक external AI API के लिए सुरक्षित server/API endpoint आवश्यक है।</p></div>
+<div class="p-4 border-t border-slate-800 bg-slate-950"><div class="flex gap-2"><input type="text" id="ai-input" placeholder="अपना पूरा सवाल लिखें..." autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();sendChatMessage()}" class="flex-1 bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-3 text-xs sm:text-sm outline-none focus:border-amber-400"><button onclick="sendChatMessage()" class="px-4 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">भेजें</button></div><p class="text-[9px] text-slate-600 mt-2">यह चैट स्थानीय ज्ञान और एडमिन द्वारा सिखाए गए कस्टम जवाबों पर आधारित है।</p></div>
 </div></div>
 
 <script>
@@ -229,7 +266,70 @@ const faqs=[
 ];
 document.getElementById('faq-list').innerHTML=faqs.map((f,i)=>`<details class="bg-slate-950/80 border border-slate-800 rounded-2xl p-5"><summary class="cursor-pointer font-bold text-amber-300 leading-6">${i+1}. ${f[0]}</summary><div class="mt-4 pt-4 border-t border-slate-800 text-slate-300 text-sm leading-7"><strong class="text-white">पूरा उत्तर:</strong> ${f[1]}</div></details>`).join('');
 
-// ==================== FIXED CHAT BOT SCRIPT ====================
+// ==================== ADMIN PANEL & CHAT BOT SCRIPT ====================
+
+// एडमिन पैनल टॉगल करने का फंक्शन
+function toggleAdminPanel() {
+  const panel = document.getElementById('admin-panel');
+  if (panel) {
+    panel.classList.toggle('hidden');
+  }
+}
+
+// एडमिन पासवर्ड वेरिफिकेशन फंक्शन (पासवर्ड: IOISSYSTEM)
+function verifyAdminPassword() {
+  const passInput = document.getElementById('admin-pass-input');
+  const authBox = document.getElementById('admin-auth-box');
+  const formBox = document.getElementById('admin-form-box');
+
+  if (passInput && passInput.value.trim() === 'IOISSYSTEM') {
+    authBox.classList.add('hidden');
+    formBox.classList.remove('hidden');
+  } else {
+    alert('गलत पासवर्ड! कृपया सही पासवर्ड दर्ज करें।');
+    passInput.value = '';
+  }
+}
+
+// एडमिन द्वारा नए सवाल-जवाब सेव करने का फंक्शन (परमानेंट स्टोर)
+function saveCustomAnswer() {
+  const qInput = document.getElementById('admin-new-q');
+  const aInput = document.getElementById('admin-new-a');
+  
+  const question = qInput.value.trim().toLowerCase();
+  const answer = aInput.value.trim();
+
+  if (!question || !answer) {
+    alert('कृपया सवाल और जवाब दोनों भरें!');
+    return;
+  }
+
+  // लोकल स्टोरेज से पुराने कस्टम जवाब निकालें
+  let customQAs = JSON.parse(localStorage.getItem('iois_custom_qa') || '{}');
+  
+  // नया सवाल और जवाब जोड़ें
+  customQAs[question] = answer;
+  localStorage.setItem('iois_custom_qa', JSON.stringify(customQAs));
+
+  alert('सफलतापूर्वक सेव हो गया! अब यूजर जब भी यह सवाल पूछेगा, बॉट यही जवाब देगा।');
+  qInput.value = '';
+  aInput.value = '';
+  toggleAdminPanel();
+}
+
+// कस्टम जवाब चेक करने का फंक्शन
+function getCustomAIResponse(userMessage) {
+  const q = userMessage.toLowerCase().trim();
+  let customQAs = JSON.parse(localStorage.getItem('iois_custom_qa') || '{}');
+
+  for (let savedQ in customQAs) {
+    if (q.includes(savedQ) || savedQ.includes(q)) {
+      return customQAs[savedQ];
+    }
+  }
+  return null;
+}
+
 function sendChatMessage() {
   const inputField = document.getElementById('ai-input');
   if(!inputField) return;
@@ -245,65 +345,67 @@ function sendChatMessage() {
 
   // AI Thinking & Response Generation
   setTimeout(() => {
-    let aiReply = "माफ़ कीजिए, मुझे आपके इस सवाल का स्पष्ट उत्तर नहीं मिला। आप IOIS प्लान्स, डिजिटल समय, मौसम, पंचांग, मैथ फॉर्मूला या जीके के बारे में पूछ सकते हैं।";
-    const q = messageText.toLowerCase();
+    // सबसे पहले चेक करें कि क्या एडमिन ने इस सवाल का कोई नया जवाब सिखाया है
+    let aiReply = getCustomAIResponse(messageText);
 
-    // 1. Live Time & Date (लाइव समय और तारीख)
-    if(q.includes('time') || q.includes('samay') || q.includes('समय') || q.includes('तारीख') || q.includes('din')) {
-      const now = new Date();
-      aiReply = `⏰ **लाइव डिजिटल सिस्टम समय व दिनांक (IST):**\n` +
-                `• तारीख: ${now.toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}\n` +
-                `• समय: ${now.toLocaleTimeString('hi-IN', { timeZone: 'Asia/Kolkata' })}\n` +
-                `• स्थिति: 100% सटीक और लाइव।`;
-    } 
-    // 2. Weather Information (मौसम)
-    else if(q.includes('weather') || q.includes('mausam') || q.includes('मौसम') || q.includes('barish') || q.includes('tapman')) {
-      aiReply = `🌤️ **मौसम सहायता प्रणाली:**\n` +
-                `वर्तमान में लाइव मौसम डेटा देखने के लिए आप अपने शहर का नाम लिखकर खोज सकते हैं (उदाहरण: 'Delhi weather' या 'Patna mausam')। डिजिटल लर्निंग और ऑनलाइन कार्यों के लिए आज का दिन उत्तम है!`;
-    }
-    // 3. Panchang & Kundali Guidance (पंचांग व जन्म कुंडली)
-    else if(q.includes('panchang') || q.includes('kundali') || q.includes('पंचांग') || q.includes('कुंडली') || q.includes('rashifal') || q.includes('ग्रह')) {
-      aiReply = `📜 **पंचांग व जन्म कुंडली सहायता:**\n` +
-                `दैनिक पंचांग, शुभ मुहूर्त और जन्म कुंडली विश्लेषण के लिए आप पारंपरिक पंचांग पट्टिकाओं का संदर्भ ले सकते हैं। IOIS प्लेटफ़ॉर्म मुख्य रूप से डिजिटल शिक्षा, स्किल्स और ऑनलाइन इनकम सपोर्ट पर केंद्रित है।`;
-    }
-    // 4. Live News Updates (लाइव समाचार)
-    else if(q.includes('news') || q.includes('samachar') || q.includes('खबर') || q.includes('ताजा खबर')) {
-      aiReply = `📰 **लाइव न्यूज़ अपडेट सिस्टम:**\n` +
-                `देश-दुनिया की ताजा और प्रामाणिक खबरों के लिए कृपया आधिकारिक समाचार पोर्टल्स या हमारे प्लेटफ़ॉर्म पर उपलब्ध स्टडी किट्स का उपयोग करें।`;
-    }
-    // 5. Math Formulas & Calculations (गणित सूत्र)
-    else if(q.includes('math') || q.includes('formula') || q.includes('गणित') || q.includes('सूत्र') || q.includes('क्षेत्रफल')) {
-      aiReply = `📐 **महत्वपूर्ण गणितीय सूत्र (Math Formulas):**\n` +
-                `• वर्ग का क्षेत्रफल = भुजा × भुजा (a²)\n` +
-                `• आयत का परिमाप = 2 × (लंबाई + चौड़ाई)\n` +
-                `• वृत्त की परिधि = 2πr\n` +
-                `• साधारण ब्याज = (P × R × T) / 100`;
-    }
-    // 6. GK & MCQ (सामान्य ज्ञान और प्रश्न)
-    else if(q.includes('gk') || q.includes('mcq') || q.includes('question') || q.includes('samanya gyan') || q.includes('सवाल')) {
-      aiReply = `🧠 **सामान्य ज्ञान (GK) त्वरित प्रश्न:**\n` +
-                `प्रश्न: भारत के प्रथम प्रधानमंत्री कौन थे?\n` +
-                `उत्तर: पंडित जवाहरलाल नेहरू।\n\n` +
-                `💡 ऐसे हजारों प्रतियोगी परीक्षा नोट्स और एमसीक्यू के लिए हमारे **Plan 05 (Student Elite Access)** को देखें!`;
-    }
-    // 7. IOIS Plans, Payout & Services (IOIS प्लान्स और पेआउट)
-    else if(q.includes('plan') || q.includes('प्लान') || q.includes('payout') || q.includes('कमाई') || q.includes('iois') || q.includes('paisa') || q.includes('पैसा')) {
-      aiReply = `🚀 **IOIS प्लेटफ़ॉर्म के 7 मास्टर प्लान्स:**\n` +
-                `• **Plan 01:** Bal Vikas (₹10) → ₹7 Payout\n` +
-                `• **Plan 02:** Youth Skill (₹49) → ₹34 Payout\n` +
-                `• **Plan 03:** Career Access (₹99) → ₹64 Payout\n` +
-                `• **Plan 04:** Family VIP (₹199) → ₹119 Payout\n` +
-                `• **Plan 05:** Student Elite (₹299) → ₹179 Payout\n` +
-                `• **Plan 06:** Reseller Hub (₹499) → ₹274 Payout\n` +
-                `• **Plan 07:** Master Access (₹999) → ₹499 Payout (All plans unlocked)\n\n` +
-                `🔗 जुड़ने के लिए आधिकारिक <a href='https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform' target='_blank' class='text-amber-400 underline font-bold'>रजिस्ट्रेशन फॉर्म</a> भरें।`;
-    }
-    // 8. Support & Contact
-    else if(q.includes('support') || q.includes('help') || q.includes('सपोर्ट') || q.includes('whatsapp') || q.includes('संपर्क')) {
-      aiReply = `📞 **आधिकारिक सपोर्ट हेल्पलाइन:**\n` +
-                `• WhatsApp: +91 8877490845\n` +
-                `• Telegram: @ioisplatform\n` +
-                `⚠️ याद रखें: कभी भी अपना OTP या UPI PIN किसी के साथ शेयर न करें।`;
+    if (!aiReply) {
+      const q = messageText.toLowerCase();
+
+      // 1. Live Time & Date
+      if(q.includes('time') || q.includes('samay') || q.includes('समय') || q.includes('तारीख') || q.includes('din')) {
+        const now = new Date();
+        aiReply = `⏰ **लाइव डिजिटल सिस्टम समय व दिनांक (IST):**\n` +
+                  `• तारीख: ${now.toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}\n` +
+                  `• समय: ${now.toLocaleTimeString('hi-IN', { timeZone: 'Asia/Kolkata' })}\n` +
+                  `• स्थिति: 100% सटीक और लाइव।`;
+      } 
+      // 2. Weather Information
+      else if(q.includes('weather') || q.includes('mausam') || q.includes('मौसम') || q.includes('barish') || q.includes('tapman')) {
+        aiReply = `🌤️ **मौसम सहायता प्रणाली:**\n` +
+                  `वर्तमान में लाइव मौसम डेटा देखने के लिए आप अपने शहर का नाम लिखकर खोज सकते हैं। डिजिटल लर्निंग और ऑनलाइन कार्यों के लिए आज का दिन उत्तम है!`;
+      }
+      // 3. Panchang
+      else if(q.includes('panchang') || q.includes('kundali') || q.includes('पंचांग') || q.includes('कुंडली') || q.includes('rashifal')) {
+        aiReply = `📜 **पंचांग व जन्म कुंडली सहायता:**\n` +
+                  `दैनिक पंचांग और शुभ मुहूर्त के लिए पारंपरिक पंचांग पट्टिकाओं का संदर्भ लें। IOIS प्लेटफ़ॉर्म मुख्य रूप से डिजिटल शिक्षा और स्किल्स पर केंद्रित है।`;
+      }
+      // 4. Math Formulas
+      else if(q.includes('math') || q.includes('formula') || q.includes('गणित') || q.includes('सूत्र')) {
+        aiReply = `📐 **महत्वपूर्ण गणितीय सूत्र (Math Formulas):**\n` +
+                  `• वर्ग का क्षेत्रफल = भुजा × भुजा (a²)\n` +
+                  `• आयत का परिमाप = 2 × (लंबाई + चौड़ाई)\n` +
+                  `• वृत्त की परिधि = 2πr\n` +
+                  `• साधारण ब्याज = (P × R × T) / 100`;
+      }
+      // 5. GK
+      else if(q.includes('gk') || q.includes('mcq') || q.includes('question') || q.includes('सवाल')) {
+        aiReply = `🧠 **सामान्य ज्ञान (GK) त्वरित प्रश्न:**\n` +
+                  `प्रश्न: भारत के प्रथम प्रधानमंत्री कौन थे?\n` +
+                  `उत्तर: पंडित जवाहरलाल नेहरू।\n\n` +
+                  `💡 ऐसे हजारों नोट्स के लिए हमारे **Plan 05 (Student Elite Access)** को देखें!`;
+      }
+      // 6. IOIS Plans & Payout
+      else if(q.includes('plan') || q.includes('प्लान') || q.includes('payout') || q.includes('कमाई') || q.includes('iois') || q.includes('paisa') || q.includes('पैसा')) {
+        aiReply = `🚀 **IOIS प्लेटफ़ॉर्म के 7 मास्टर प्लान्स:**\n` +
+                  `• **Plan 01:** Bal Vikas (₹10) → ₹7 Payout\n` +
+                  `• **Plan 02:** Youth Skill (₹49) → ₹34 Payout\n` +
+                  `• **Plan 03:** Career Access (₹99) → ₹64 Payout\n` +
+                  `• **Plan 04:** Family VIP (₹199) → ₹119 Payout\n` +
+                  `• **Plan 05:** Student Elite (₹299) → ₹179 Payout\n` +
+                  `• **Plan 06:** Reseller Hub (₹499) → ₹274 Payout\n` +
+                  `• **Plan 07:** Master Access (₹999) → ₹499 Payout\n\n` +
+                  `🔗 जुड़ने के लिए आधिकारिक <a href='https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform' target='_blank' class='text-amber-400 underline font-bold'>रजिस्ट्रेशन फॉर्म</a> भरें।`;
+      }
+      // 7. Support
+      else if(q.includes('support') || q.includes('help') || q.includes('सपोर्ट') || q.includes('whatsapp') || q.includes('संपर्क')) {
+        aiReply = `📞 **आधिकारिक सपोर्ट हेल्पलाइन:**\n` +
+                  `• WhatsApp: +91 8877490845\n` +
+                  `• Telegram: @ioisplatform\n` +
+                  `⚠️ याद रखें: कभी भी अपना OTP या UPI PIN किसी के साथ शेयर न करें।`;
+      }
+      else {
+        aiReply = `माफ़ कीजिए, मुझे इस नए सवाल का उत्तर अभी नहीं पता। आप चैट के ऊपर दिए गए **एडमिन पैनल** बटन पर क्लिक करके पासवर्ड (**IOISSYSTEM**) डालकर मुझे यह नया सवाल और उसका जवाब सिखा सकते हैं, ताकि अगली बार से मैं यूजर को वही जवाब दूँ!`;
+      }
     }
 
     // AI message append
@@ -333,7 +435,7 @@ function openAIChat(){
  m.classList.remove('hidden');
  m.classList.add('flex');
  if(!document.getElementById('chat-messages').children.length){
-  addChatMessage('नमस्ते! मैं आपका IOIS Smart Assistant हूँ। मैं आपके सवाल के context के अनुसार plans, payout, interview, FAQ, safety, privacy और activation process समझा सकता हूँ। आप पूरा सवाल लिखें।');
+  addChatMessage('नमस्ते! मैं आपका IOIS Smart Assistant हूँ। आप मुझसे कोई भी सवाल पूछ सकते हैं। यदि कोई नया सवाल हो, तो एडमिन पैनल से मुझे सिखा भी सकते हैं!');
  }
  renderSuggestions();
  setTimeout(()=>document.getElementById('ai-input').focus(),150);
