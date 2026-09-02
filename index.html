@@ -1445,6 +1445,236 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAIChat()});
     <span>•</span>
     <span>💬 WhatsApp Support</span>
   </div>
-</section>
+</section><!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOIS PLATFORM - Indian Online Income Supporting System</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0b0f19; color: #f8fafc; line-height: 1.6; padding-bottom: 60px; }
+        a { color: inherit; text-decoration: none; }
+
+        /* HEADER */
+        header { background: #131b2e; border-bottom: 1px solid #1e293b; padding: 14px 20px; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .brand h1 { color: #f59e0b; font-size: 20px; font-weight: 900; }
+        .brand span { color: #94a3b8; font-size: 10px; font-weight: 600; display: block; }
+        
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+
+        /* HERO SECTION */
+        .hero { text-align: center; padding: 35px 15px 25px; background: linear-gradient(180deg, #131b2e 0%, #0b0f19 100%); border-bottom: 1px solid #1e293b; }
+        .hero-badge { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 12px; }
+        .hero h2 { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 10px; line-height: 1.3; }
+        .hero p { color: #94a3b8; font-size: 14px; max-width: 550px; margin: 0 auto 20px; }
+        
+        .btn-main { display: inline-block; width: 100%; max-width: 300px; background: #f59e0b; color: #000; font-weight: 800; padding: 14px 20px; border-radius: 10px; font-size: 16px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); transition: 0.2s; }
+        .btn-main:hover { background: #d97706; }
+
+        .trust-badges { display: flex; justify-content: center; gap: 15px; margin-top: 15px; font-size: 11px; color: #4ade80; flex-wrap: wrap; }
+
+        /* PRODUCT PREVIEW GRID */
+        .preview-section { margin: 30px 0; text-align: center; }
+        .section-title { font-size: 20px; color: #fff; font-weight: 800; margin-bottom: 6px; border-left: 4px solid #f59e0b; padding-left: 10px; text-align: left; }
+        .section-desc { font-size: 12px; color: #94a3b8; text-align: left; margin-bottom: 16px; }
+
+        .preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .preview-card { background: #131b2e; border: 1px solid #1e293b; border-radius: 10px; padding: 15px; text-align: center; }
+        .preview-card .icon { font-size: 28px; margin-bottom: 6px; }
+        .preview-card h4 { font-size: 13px; color: #fff; margin-bottom: 4px; }
+        .preview-card span { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+
+        /* CLEAN 3-TIER PLANS */
+        .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 15px; }
+        .plan-card { background: #131b2e; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; position: relative; text-align: center; }
+        .plan-featured { border: 2px solid #f59e0b; background: linear-gradient(145deg, #131b2e 0%, #1e1b4b 100%); }
+        .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #f59e0b; color: #000; padding: 2px 10px; border-radius: 10px; font-size: 10px; font-weight: bold; }
+        
+        .price { font-size: 28px; font-weight: 900; color: #fff; margin: 10px 0 15px; }
+        .price span { font-size: 12px; color: #94a3b8; font-weight: normal; }
+        .plan-features { text-align: left; font-size: 12px; color: #cbd5e1; margin-bottom: 20px; padding-left: 15px; }
+        .plan-features li { margin-bottom: 6px; }
+
+        .btn-plan { display: block; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 13px; text-align: center; }
+        .btn-plan-gold { background: #f59e0b; color: #000; }
+        .btn-plan-outline { background: transparent; border: 1px solid #334155; color: #fff; }
+
+        /* QUICK 3-QUESTION QUIZ */
+        .quiz-box { background: #131b2e; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; margin-top: 15px; }
+        .quiz-opt { background: #0f172a; border: 1px solid #334155; padding: 10px; border-radius: 8px; margin-top: 8px; cursor: pointer; width: 100%; text-align: left; color: #fff; font-size: 13px; }
+        .quiz-opt:hover { border-color: #f59e0b; }
+
+        /* DIRECT WHATSAPP OPTION */
+        .whatsapp-box { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 20px; text-align: center; margin: 30px 0; }
+        .btn-wa { display: inline-block; background: #22c55e; color: #fff; font-weight: bold; padding: 12px 20px; border-radius: 8px; font-size: 14px; margin-top: 10px; }
+
+        footer { text-align: center; padding: 20px; font-size: 11px; color: #64748b; border-top: 1px solid #1e293b; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <h1>IOIS PLATFORM</h1>
+            <span>INDIAN ONLINE INCOME SUPPORTING SYSTEM</span>
+        </div>
+        <a href="https://wa.me/918877490845?text=Hello,%20I%20have%20a%20question%20about%20IOIS" target="_blank" style="font-size: 12px; color: #22c55e; font-weight: bold; border: 1px solid #22c55e; padding: 4px 10px; border-radius: 6px;">💬 हेल्प सपोर्ट</a>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <span class="hero-badge">⚡ Instant Digital Access Ecosystem</span>
+        <h2>एक ही जगह पाएं सभी <span style="color: #f59e0b;">Premium Digital Study & Skill Assets</span></h2>
+        <p>NCERT PDFs, ATS Resume Templates, E-Books और 50%-70% Instant Incentive Model।</p>
+        <a href="#plans" class="btn-main">🚀 सीधे प्लान्स देखें (मात्र ₹49 से)</a>
+        
+        <div class="trust-badges">
+            <span>🔒 100% Secure UPI Payments</span>
+            <span>•</span>
+            <span>⚡ Instant Verification</span>
+            <span>•</span>
+            <span>💬 Direct WhatsApp Support</span>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- PRODUCT PREVIEW GRID -->
+        <section class="preview-section">
+            <h3 class="section-title">आपको डिजिटल एक्सेस में क्या मिलेगा?</h3>
+            <p class="section-desc">जॉइन करते ही मिलने वाले प्रोडक्ट्स की एक त्वरित झलक:</p>
+            
+            <div class="preview-grid">
+                <div class="preview-card">
+                    <div class="icon">📚</div>
+                    <h4>NCERT Books</h4>
+                    <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">PDF Kits</span>
+                </div>
+                <div class="preview-card">
+                    <div class="icon">📄</div>
+                    <h4>Pro Resumes</h4>
+                    <span style="background: rgba(34, 197, 94, 0.2); color: #4ade80;">ATS Templates</span>
+                </div>
+                <div class="preview-card">
+                    <div class="icon">🤖</div>
+                    <h4>AI Prompts</h4>
+                    <span style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Mastery Guide</span>
+                </div>
+                <div class="preview-card">
+                    <div class="icon">💼</div>
+                    <h4>Resell Rights</h4>
+                    <span style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">Incentive License</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLEAN 3-TIER PLANS -->
+        <section id="plans" style="margin: 30px 0;">
+            <h3 class="section-title">सही प्लान चुनें और जॉइन करें</h3>
+            <p class="section-desc">अपनी आवश्यकतानुसार किसी भी एक प्लान से शुरुआत करें:</p>
+
+            <div class="plans-grid">
+                <!-- Plan 1 -->
+                <div class="plan-card">
+                    <h4 style="color: #38bdf8; font-size: 16px;">STUDENT STARTER</h4>
+                    <div class="price">₹49 <span>/ लाइफटाइम</span></div>
+                    <ul class="plan-features">
+                        <li>• Class 1-12 Complete NCERT PDFs</li>
+                        <li>• Pro ATS Resume Templates</li>
+                        <li>• ₹34 प्रति रेफरल इंस्टेंट पेआउट</li>
+                    </ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform" target="_blank" class="btn-plan btn-plan-outline">₹49 में एक्टिवेट करें</a>
+                </div>
+
+                <!-- Plan 2 (Highlighted) -->
+                <div class="plan-card plan-featured">
+                    <span class="plan-badge">MOST POPULAR</span>
+                    <h4 style="color: #f59e0b; font-size: 18px;">ALL-IN-ONE PRO</h4>
+                    <div class="price" style="color: #f59e0b;">₹299 <span>/ लाइफटाइम</span></div>
+                    <ul class="plan-features">
+                        <li>• Study PDFs + Job Preparation Kit</li>
+                        <li>• SSC, Railway & Banking Notes</li>
+                        <li>• Speed Math & Static GK Kits</li>
+                        <li>• ₹179 प्रति रेफरल इंस्टेंट पेआउट</li>
+                    </ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform" target="_blank" class="btn-plan btn-plan-gold">₹299 में एक्टिवेट करें</a>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="plan-card">
+                    <h4 style="color: #4ade80; font-size: 16px;">SUPREME MASTER</h4>
+                    <div class="price">₹999 <span>/ लाइफटाइम</span></div>
+                    <ul class="plan-features">
+                        <li>• सभी 7 प्लान्स का Unlocked Access</li>
+                        <li>• WhatsApp ऑटोमेशन बॉट स्क्रिप्ट्स</li>
+                        <li>• VIP एडमिन डायरेक्ट गाइडेंस</li>
+                        <li>• ₹499 का सबसे बड़ा पेआउट</li>
+                    </ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform" target="_blank" class="btn-plan btn-plan-outline">₹999 में एक्टिवेट करें</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK 3-QUESTION QUIZ -->
+        <section style="margin: 30px 0;">
+            <h3 class="section-title">📝 quick असेसमेंट (3 सवाल)</h3>
+            <div class="quiz-box" id="quizContainer">
+                <span style="font-size: 11px; color: #94a3b8;" id="qStep">प्रश्न 1 / 3</span>
+                <h4 style="color: #f59e0b; font-size: 15px; margin-top: 4px;" id="qText">आप मुख्य रूप से IOIS से क्या चाहते हैं?</h4>
+                <div id="qOptions">
+                    <button class="quiz-opt" onclick="nextQuiz()">A. NCERT व पढ़ाई की सामग्री</button>
+                    <button class="quiz-opt" onclick="nextQuiz()">B. प्रतियोगी परीक्षा (SSC/Railway) नोट्स</button>
+                    <button class="quiz-opt" onclick="nextQuiz()">C. डिजिटल रीसेलिंग व रेफरल इनकम</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIRECT WHATSAPP JOINING OPTION -->
+        <section class="whatsapp-box">
+            <h3 style="color: #22c55e; font-size: 18px; margin-bottom: 6px;">क्या आपको गूगल फॉर्म भरने में समस्या आ रही है?</h3>
+            <p style="font-size: 13px; color: #cbd5e1;">चिंता न करें! आप सीधे हमारे व्हाट्सएप पर मैसेज करके भी अपनी मेंबरशिप शुरू कर सकते हैं।</p>
+            <a href="https://wa.me/918877490845?text=Hello,%20Mujhe%20IOIS%20Platform%20join%20karna%20hai" target="_blank" class="btn-wa">💬 सीधे WhatsApp पर जॉइन करें (+91 8877490845)</a>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 IOIS PLATFORM - Indian Online Income Supporting System</p>
+        <p style="margin-top: 4px;">256-Bit SSL Encrypted | Verified Digital Learning Portal</p>
+    </footer>
+
+    <script>
+        const quizData = [
+            { step: "प्रश्न 1 / 3", q: "आप मुख्य रूप से IOIS से क्या चाहते हैं?", opts: ["NCERT व पढ़ाई की सामग्री", "प्रतियोगी परीक्षा (SSC/Railway) नोट्स", "डिजिटल रीसेलिंग व रेफरल इनकम"] },
+            { step: "प्रश्न 2 / 3", q: "आपके पास उपयोग के लिए क्या उपलब्ध है?", opts: ["स्मार्टफोन और इंटरनेट", "लैपटॉप/कंप्यूटर", "दोनों उपलब्ध हैं"] },
+            { step: "प्रश्न 3 / 3", q: "आप प्रतिदिन कितना समय दे सकते हैं?", opts: ["30 मिनट से 1 घंटा", "1 से 2 घंटे", "2 घंटे से अधिक"] }
+        ];
+        let currentQ = 0;
+
+        function nextQuiz() {
+            currentQ++;
+            if(currentQ < quizData.length) {
+                document.getElementById('qStep').textContent = quizData[currentQ].step;
+                document.getElementById('qText').textContent = quizData[currentQ].q;
+                const optsBox = document.getElementById('qOptions');
+                optsBox.innerHTML = quizData[currentQ].opts.map(o => `<button class="quiz-opt" onclick="nextQuiz()">${o}</button>`).join('');
+            } else {
+                document.getElementById('quizContainer').innerHTML = `
+                    <div style="text-align:center; padding: 10px;">
+                        <h4 style="color:#4ade80; font-size:16px;">🎉 असेसमेंट पूर्ण हुआ!</h4>
+                        <p style="font-size:12px; color:#cbd5e1; margin:8px 0;">आपके लिए <strong>₹299 का ALL-IN-ONE PRO</strong> या <strong>₹49 का STARTER</strong> प्लान सबसे उपयुक्त है।</p>
+                        <a href="#plans" class="btn-main" style="padding:8px 16px; font-size:13px; max-width:200px;">उपयुक्त प्लान चुनें</a>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
+
 
 </html>
