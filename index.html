@@ -581,5 +581,182 @@ function quickAsk(x){
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAIChat()});
 </script>
+</body><!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOIS Platform - Indian Online Income Supporting System</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0f172a; color: #f8fafc; line-height: 1.6; padding-bottom: 40px; }
+        
+        /* Header & Navigation */
+        header { background-color: #1e293b; padding: 16px 24px; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .logo-title h1 { color: #f59e0b; font-size: 22px; font-weight: 800; }
+        .logo-title p { color: #94a3b8; font-size: 12px; }
+        .live-clock { background: #0f172a; color: #38bdf8; padding: 6px 14px; border-radius: 8px; border: 1px solid #334155; font-family: monospace; font-size: 15px; font-weight: bold; }
+        
+        nav { width: 100%; display: flex; gap: 10px; overflow-x: auto; padding-top: 8px; }
+        nav a { color: #cbd5e1; text-decoration: none; font-size: 13px; font-weight: 600; background: #0f172a; padding: 8px 14px; border-radius: 6px; border: 1px solid #334155; whitespace-nowrap; }
+        nav a:hover, nav a.active { border-color: #f59e0b; color: #f59e0b; }
+
+        /* Container & Cards */
+        .container { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
+        .hero { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #f59e0b40; padding: 32px 24px; border-radius: 16px; text-align: center; margin-bottom: 24px; }
+        .hero h2 { font-size: 28px; color: #fff; margin-bottom: 12px; }
+        .hero p { color: #94a3b8; font-size: 15px; max-width: 700px; margin: 0 auto 20px auto; }
+        
+        .badge { background: #f59e0b20; color: #f59e0b; border: 1px solid #f59e0b40; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 12px; }
+        
+        .btn-primary { background: #f59e0b; color: #0f172a; font-weight: bold; text-decoration: none; padding: 12px 24px; border-radius: 8px; display: inline-block; border: none; cursor: pointer; font-size: 15px; }
+        .btn-primary:hover { background: #d97706; }
+        
+        .section-title { font-size: 20px; color: #f8fafc; margin: 32px 0 16px 0; border-left: 4px solid #f59e0b; padding-left: 10px; }
+
+        /* Grid Layouts */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .card { background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; }
+        .card h3 { color: #f59e0b; font-size: 18px; margin-bottom: 8px; }
+        .card p { color: #94a3b8; font-size: 14px; }
+
+        /* Proof & Trust Section */
+        .proof-box { background: #0f172a; padding: 12px; border-radius: 8px; border: 1px solid #334155; margin-top: 10px; font-size: 13px; color: #4ade80; display: flex; justify-content: space-between; }
+        
+        /* Form Styling */
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
+        .form-group input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: #fff; font-size: 14px; }
+
+        /* Footer */
+        footer { text-align: center; margin-top: 40px; font-size: 12px; color: #64748b; border-top: 1px solid #1e293b; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-title">
+            <h1>IOIS Platform</h1>
+            <p>Indian Online Income Supporting System</p>
+        </div>
+        <div id="istClock" class="live-clock">00:00:00 IST</div>
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#plans">Master Plans</a>
+            <a href="#idcard">ID Builder</a>
+            <a href="#support">Support</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <span class="badge">✓ Government Registered & Trusted Guidance</span>
+            <h2>घर बैठे ऑनलाइन इनकम सपोर्ट और डिजिटल गाइडेन्स</h2>
+            <p>IOIS Platform आपको सही डिजिटल वर्क, मास्टर बिजनेस प्लान्स और 100% ट्रांसपेरेंट सपोर्ट प्रदान करता है।</p>
+            <a href="#plans" class="btn-primary">Master Plans देखें</a>
+        </section>
+
+        <!-- How It Works -->
+        <h2 class="section-title" id="how-it-works">यह कैसे काम करता है? (How It Works)</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>1. रजिस्टर करें</h3>
+                <p>अपनी बेसिक डिटेल्स भरकर IOIS प्लेटफॉर्म पर अपना डिजिटल प्रोफाइल बनाएं।</p>
+            </div>
+            <div class="card">
+                <h3>2. प्लान चुनें</h3>
+                <p>अपने समय और कौशल के अनुसार उपयुक्त IOIS Master Plan सेलेक्ट करें।</p>
+            </div>
+            <div class="card">
+                <h3>3. वर्क & सपोर्ट</h3>
+                <p>दिए गए गाइडेंस के अनुसार ऑनलाइन वर्क पूरा करें और डायरेक्ट पेआउट प्राप्त करें।</p>
+            </div>
+        </div>
+
+        <!-- Master Plans -->
+        <h2 class="section-title" id="plans">IOIS Master Business Plans</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>Plan Level 1 (Basic)</h3>
+                <p>शुरुआती यूज़र्स के लिए ऑटोमेटेड ट्रेनिंग और बेसिक गाइडेंस मॉडल।</p>
+            </div>
+            <div class="card">
+                <h3>Plan Level 2 (Advance)</h3>
+                <p>एडवांस वर्क सपोर्ट, वीकली पेआउट ट्रैकिंग और ऑटो-नोटिफिकेशन।</p>
+            </div>
+            <div class="card">
+                <h3>Plan Level 3 (Premium)</h3>
+                <p>डायरेक्ट 1-on-1 सपोर्ट, स्पेशल मेंबरशिप कार्ड और प्रायोरिटी पेआउट।</p>
+            </div>
+        </div>
+
+        <!-- Live Trust & Activity -->
+        <h2 class="section-title">लाइव एक्टिविटी & ट्रस्ट प्रूफ</h2>
+        <div class="card">
+            <p style="color: #cbd5e1; font-size: 14px;">हाल ही में जुड़े सदस्य और पेआउट अपडेट:</p>
+            <div class="proof-box">
+                <span>Priyanshu (Bihar) - Plan Level 2 Updated</span>
+                <span>Just Now</span>
+            </div>
+            <div class="proof-box">
+                <span>Rahul S. (UP) - Support Ticket Resolved</span>
+                <span>5 mins ago</span>
+            </div>
+        </div>
+
+        <!-- ID Card Builder -->
+        <h2 class="section-title" id="idcard">Digital ID Card Generator</h2>
+        <div class="card" style="max-width: 500px; margin: 0 auto;">
+            <div class="form-group">
+                <label>पूरा नाम (Full Name):</label>
+                <input type="text" placeholder="अपना नाम दर्ज करें">
+            </div>
+            <div class="form-group">
+                <label>पदनाम (Role / Designation):</label>
+                <input type="text" placeholder="उदा: Independent Executive">
+            </div>
+            <button type="button" class="btn-primary" style="width: 100%;">ID Card जेनरेट करें</button>
+        </div>
+
+        <!-- Support Section -->
+        <h2 class="section-title" id="support">सहायता एवं संपर्क (Support)</h2>
+        <div class="card" style="text-align: center;">
+            <p style="margin-bottom: 16px;">किसी भी सवाल या समस्या के लिए हमारी आधिकारिक सपोर्ट टीम से जुड़ें:</p>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <a href="https://t.me/" target="_blank" class="btn-primary" style="background: #0284c7; color: #fff;">Telegram Group जॉइन करें</a>
+                <a href="https://wa.me/" target="_blank" class="btn-primary" style="background: #16a34a; color: #fff;">WhatsApp Support</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 IOIS Platform - Official Indian Online Income Supporting System.</p>
+        <p style="margin-top: 4px;">Privacy Policy | Terms of Service | Help Desk</p>
+    </footer>
+
+    <!-- Live IST Clock Script -->
+    <script>
+        function updateISTClock() {
+            const options = {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            document.getElementById('istClock').textContent = formatter.format(new Date()) + ' IST';
+        }
+        setInterval(updateISTClock, 1000);
+        updateISTClock();
+    </script>
 </body>
+</html>
+
 </html>
